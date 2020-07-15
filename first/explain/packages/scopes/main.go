@@ -16,10 +16,15 @@ func main() {
 	// two files belong to the same package
 	// calling `bye()` of bye.go here
 	bye()
+	hey()
 }
 
 // EXERCISE: Remove the comments from the below function
 //           And analyze the error message
+
+// func bye() {
+// 	fmt.Println("Bye!")
+// }
 
 // func bye() {
 // 	fmt.Println("Bye!")
