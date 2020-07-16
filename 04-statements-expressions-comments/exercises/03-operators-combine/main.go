@@ -8,6 +8,11 @@
 
 package main
 
+import (
+	"fmt"
+	"runtime"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Operators combine the expressions
 //
@@ -23,5 +28,5 @@ package main
 
 func main() {
 
-	// fmt.Println("Hello!" + ?)
+	fmt.Println("Hello! " + runtime.Version())
 }
