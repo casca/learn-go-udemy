@@ -53,4 +53,26 @@ func main() {
 
 	// fmt.Println(tooSoon)
 	// var tooSoon string
+
+	ii := 314
+	ff := 3.14
+	ss := "Hello"
+	bb := true
+	fmt.Println(ii, ff, ss, bb)
+
+	jj, uu := 14, true
+	fmt.Println(jj, uu)
+
+	aaa, ccc := 42, "good"
+	fmt.Println(aaa, ccc)
+
+	sum := 27 + 3.5
+	fmt.Println(sum)
+
+	ba, _ := true, true
+	fmt.Println(ba)
+
+	aage, yyourAge := 1, 3
+	ratio, aage := 3.14, 42
+	fmt.Println(aage, yyourAge, ratio)
 }
