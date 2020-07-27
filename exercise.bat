@@ -1,4 +1,4 @@
-REM @ECHO OFF
+@ECHO OFF
 
 SET /p COUNTER=<template\counter_exercise
 SET COUNTER=%COUNTER: =%
