@@ -2,8 +2,8 @@
 counter=$(<template/counter_lesson)
 ((counter++))
 padded=$(printf "%03d" $counter)
-mkdir ${padded}_$1
-cp template/main.go ${padded}_$1/
+mkdir _lessons/${padded}_$1
+cp template/main.go _lessons/${padded}_$1/
 echo $counter > template/counter_lesson
-code ${padded}_$1/main.go
-./watch.sh ${padded}_$1
+code _lessons/${padded}_$1/main.go
+./watch.sh _lessons/${padded}_$1
