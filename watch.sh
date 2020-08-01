@@ -1,2 +1,2 @@
 #!/bin/sh
-nodemon --watch ../ -e go --exec go run $1/main.go
+nodemon --watch ../ -e go --exec "go run $1/main.go || exit 1"
