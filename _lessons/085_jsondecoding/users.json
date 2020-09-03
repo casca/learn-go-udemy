@@ -1,0 +1,17 @@
+[
+	{
+		"username": "inanc"
+	},
+	{
+		"username": "god",
+		"Permissions": {
+			"admin": true
+		}
+	},
+	{
+		"username": "devil",
+		"Permissions": {
+			"write": true
+		}
+	}
+]
