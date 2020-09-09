@@ -16,46 +16,57 @@ type parser struct {
 	domains []string
 	total   int
 	lines   int
+	lerr    error
 }
 
-func newParser() parser {
-	return parser{
+func newParser() *parser {
+	return &parser{
 		sum: make(map[string]result),
 	}
 }
 
-func parse(p *parser, line string) (parsed result, err error) {
+func parse(p *parser, line string) (r result) {
+	if p.lerr != nil {
+		return
+	}
+
 	p.lines++
 
 	fields := strings.Fields(line)
 	if len(fields) != 2 {
-		err = fmt.Errorf("Wrong input: %v (line #%d)", fields, p.lines)
+		p.lerr = fmt.Errorf("Wrong input: %v (line #%d)", fields, p.lines)
 		return
 	}
 
-	parsed.domain = fields[0]
-	parsed.visits, err = strconv.Atoi(fields[1])
-	if err != nil || parsed.visits < 0 {
-		err = fmt.Errorf("Wrong input: %q (line #%d)", fields[1], p.lines)
-		return
+	var err error
+
+	r.domain = fields[0]
+	r.visits, err = strconv.Atoi(fields[1])
+	if err != nil || r.visits < 0 {
+		p.lerr = fmt.Errorf("Wrong input: %q (line #%d)", fields[1], p.lines)
 	}
 
 	return
 }
 
-func update(p *parser, parsed result) {
-	// fmt.Printf("update.p  : %p - &p: %p\n\n", p, &p)
-	domain, visits := parsed.domain, parsed.visits
-
-	if _, ok := p.sum[domain]; !ok {
-		p.domains = append(p.domains, domain)
+func update(p *parser, r result) {
+	if p.lerr != nil {
+		return
 	}
-	p.total += visits
 
-	p.sum[domain] = result{
-		domain: domain,
-		visits: visits + p.sum[domain].visits,
+	if _, ok := p.sum[r.domain]; !ok {
+		p.domains = append(p.domains, r.domain)
+	}
+	p.total += r.visits
+
+	p.sum[r.domain] = result{
+		domain: r.domain,
+		visits: r.visits + p.sum[r.domain].visits,
 	}
 
 	// p.sum[domain].visits += visits // map fields are not addressible, &p.sum[domain] is not valid
+}
+
+func err(p *parser) error {
+	return p.lerr
 }
